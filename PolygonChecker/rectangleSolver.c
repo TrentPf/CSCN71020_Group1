@@ -11,18 +11,18 @@ void processRectangle() {
         printf("Point %d - Enter x and y: ", i + 1);
         if (scanf_s("%lf %lf", &points[i][0], &points[i][1]) != 2) {
             printf("Invalid input. Please enter numeric values.\n");
-            i--; // Retry this point
+            i--; 
         }
     }
 
     // Compute distances between points
     double distances[4], diagonals[2];
-    distances[0] = calculateDistance(points[0][0], points[0][1], points[1][0], points[1][1]); // AB
-    distances[1] = calculateDistance(points[1][0], points[1][1], points[2][0], points[2][1]); // BC
-    distances[2] = calculateDistance(points[2][0], points[2][1], points[3][0], points[3][1]); // CD
-    distances[3] = calculateDistance(points[3][0], points[3][1], points[0][0], points[0][1]); // DA
-    diagonals[0] = calculateDistance(points[0][0], points[0][1], points[2][0], points[2][1]); // AC
-    diagonals[1] = calculateDistance(points[1][0], points[1][1], points[3][0], points[3][1]); // BD
+    distances[0] = calculateDistance(points[0][0], points[0][1], points[1][0], points[1][1]); 
+    distances[1] = calculateDistance(points[1][0], points[1][1], points[2][0], points[2][1]); 
+    distances[2] = calculateDistance(points[2][0], points[2][1], points[3][0], points[3][1]); 
+    distances[3] = calculateDistance(points[3][0], points[3][1], points[0][0], points[0][1]); 
+    diagonals[0] = calculateDistance(points[0][0], points[0][1], points[2][0], points[2][1]); 
+    diagonals[1] = calculateDistance(points[1][0], points[1][1], points[3][0], points[3][1]); 
 
     // Check if it's a rectangle
     if (isRectangle(distances, diagonals)) {
