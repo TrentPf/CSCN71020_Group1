@@ -5,7 +5,7 @@
 #include "triangleSolver.h"
 
 #define PI  3.14
-//159265358979323846
+
 
 char* analyzeTriangle(double side1, double side2, double side3) {
 	char* result = "";

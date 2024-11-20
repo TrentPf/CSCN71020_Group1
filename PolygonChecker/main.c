@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdbool.h>
-
+#include <math.h>
 #include "main.h"
 #include "triangleSolver.h"
+#include "rectangleSolver.h"
 
 int side = 0;
 
@@ -25,6 +26,10 @@ int main() {
 			printf_s("%s\n", result);
 			
 			break;
+		case 2:
+			printf_s("Rectangle selected.\n");
+			processRectangle();
+			break;
 		case 0:
 			continueProgram = false;
 			break;
@@ -46,15 +51,17 @@ void printWelcome() {
 
 int printShapeMenu() {
 	printf_s("1. Triangle\n");
+	printf_s("2. Rectangle\n");
 	printf_s("0. Exit\n");
 
 	int shapeChoice;
 
 	printf_s("Enter number: ");
-	scanf_s("%1o", &shapeChoice);
+	scanf_s("%1d", &shapeChoice);
 
 	return shapeChoice;
 }
+
 
 double* getTriangleSides(double* triangleSides) {
 	printf_s("Enter the three sides of the triangle: ");
