@@ -155,6 +155,8 @@ namespace PolygonCheckerTesting
 			double side2 = 6.00;
 
 			double perimeter = calculateRectanglePerimeter(side1, side2);
+
+			Assert::AreEqual(18.00, perimeter);
 		}
 		TEST_METHOD(TestRectangleAreaCorrect)
 		{
@@ -164,6 +166,8 @@ namespace PolygonCheckerTesting
 			double side2 = 6.00;
 
 			double area = calculateRectangleArea(side1, side2);
+
+			Assert::AreEqual(18.00, area);
 		}
 	};
 }
