@@ -115,19 +115,55 @@ namespace PolygonCheckerTesting
 		}
 		TEST_METHOD(TestPolygonIsRectangle)
 		{
-			//Tests polygon is correctly identified as Rectangle when valid points entered: 2,4   2,6   4,4   4,6
+			//Tests polygon is correctly identified as Rectangle when valid distances and diagonals are calculated from points
+
+			double distances[] = { 4.00, 6.00, 4.00, 6.00 };
+			double diagonals[] = { 2.00, 2.00 };
+
+			bool validRectangle = isRectangle(distances, diagonals);
+
+			Assert::AreEqual(true, validRectangle);
+
 		}
-		TEST_METHOD(TestPolygonIsNotRectangle)
+		TEST_METHOD(TestPolygonIsNotRectangleInvalidDistances)
 		{
-			//Tests polygon is correctly identified as not a Rectangle with invalid points: 2,4   2,6   4,4   4,10
+			//Tests polygon is correctly identified as not a Rectangle with invalid distances
+
+			double distances[] = { 3.00, 6.00, 4.00, 6.00 };
+			double diagonals[] = { 2.00, 2.00 };
+
+			bool validRectangle = isRectangle(distances, diagonals);
+
+			Assert::AreEqual(false, validRectangle);
+		}
+		TEST_METHOD(TestPolygonIsNotRectangleInvalidDiagonals)
+		{
+			//Tests polygon is correctly identified as not a Rectangle with invalid diagonals
+
+			double distances[] = { 4.00, 6.00, 4.00, 6.00 };
+			double diagonals[] = { 1.00, 2.00 };
+
+			bool validRectangle = isRectangle(distances, diagonals);
+
+			Assert::AreEqual(true, validRectangle);
 		}
 		TEST_METHOD(TestPolygonPerimeterCorrect)
 		{
-			//Tests correct calculation of polygon perimeter when points entered: 2,4   2,6   4,4   4,10
+			//Tests correct calculation of polygon perimeter when side lengths are 3.00 and 6.00
+
+			double side1 = 3.00;
+			double side2 = 6.00;
+
+			double perimeter = calculateRectanglePerimeter(side1, side2);
 		}
 		TEST_METHOD(TestRectangleAreaCorrect)
 		{
-			//Tests correct calculation of rectangle area when points entered: 2,4   2,6   4,4   4,6
+			//Tests correct calculation of rectangle area when side lengths are 3.00 and 6.00
+
+			double side1 = 3.00;
+			double side2 = 6.00;
+
+			double area = calculateRectangleArea(side1, side2);
 		}
 	};
 }
