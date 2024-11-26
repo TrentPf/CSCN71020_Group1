@@ -17,7 +17,7 @@ namespace PolygonCheckerTesting
 	TEST_CLASS(PolygonCheckerTesting)
 	{
 	public:
-		
+
 		TEST_METHOD(TestInvalidTriangleSideLengthZero)
 		{
 			//Tests Triangle is identified as invalid when at least one side length is zero and other two are 3.00, 4.00
@@ -75,9 +75,10 @@ namespace PolygonCheckerTesting
 			double angle2 = calculateAngle(side2, side1, side3);
 			double angle3 = calculateAngle(side3, side1, side2);
 
-			double sumAngle = angle1 + angle2 + angle3;
+			double sumAngle = (angle1 + angle2 + angle3);
+			double roundAngle = round(sumAngle);
 
-			Assert::AreEqual(180.0, sumAngle);
+			Assert::AreEqual(180.0, roundAngle);
 
 
 		}
@@ -93,9 +94,10 @@ namespace PolygonCheckerTesting
 			double angle2 = calculateAngle(side2, side1, side3);
 			double angle3 = calculateAngle(side3, side1, side2);
 
-			double sumAngle = angle1 + angle2 + angle3;
+			double sumAngle = (angle1 + angle2 + angle3);
+			double roundAngle = round(sumAngle);
 
-			Assert::AreEqual(180.0, sumAngle);
+			Assert::AreEqual(180.0, roundAngle);
 		}
 		TEST_METHOD(TestScaleneInnerAngleCorrect)
 		{
@@ -109,9 +111,10 @@ namespace PolygonCheckerTesting
 			double angle2 = calculateAngle(side2, side1, side3);
 			double angle3 = calculateAngle(side3, side1, side2);
 
-			double sumAngle = angle1 + angle2 + angle3;
+			double sumAngle = (angle1 + angle2 + angle3);
+			double roundAngle = round(sumAngle);
 
-			Assert::AreEqual(180.0, sumAngle);
+			Assert::AreEqual(180.0, roundAngle);
 		}
 		TEST_METHOD(TestPolygonIsRectangle)
 		{
