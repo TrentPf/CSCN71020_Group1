@@ -4,7 +4,8 @@
 extern "C" char* analyzeTriangle(double side1, double side2, double side3);
 extern "C" double calculateAngle(double a, double b, double c);
 extern "C" double calculateDistance(double x1, double y1, double x2, double y2);
-extern "C" bool isRectangle(double distances[], double diagonals[]);
+extern "C" bool isRectangleFromDistances(double distances[]);
+extern "C" void sortDistances(double* distances, int size);
 extern "C" double calculateRectangleArea(double side1, double side2);
 extern "C" double calculateRectanglePerimeter(double side1, double side2);
 
@@ -120,10 +121,10 @@ namespace PolygonCheckerTesting
 		{
 			//Tests polygon is correctly identified as Rectangle when valid distances and diagonals are calculated from points
 
-			double distances[] = { 4.00, 6.00, 4.00, 6.00 };
-			double diagonals[] = { 2.00, 2.00 };
+			double distances[] = { 4.00, 4.00, 6.00, 6.00,2.00, 2.00 };
+			
 
-			bool validRectangle = isRectangle(distances, diagonals);
+			bool validRectangle = isRectangleFromDistances(distances);
 
 			Assert::AreEqual(true, validRectangle);
 
@@ -132,10 +133,9 @@ namespace PolygonCheckerTesting
 		{
 			//Tests polygon is correctly identified as not a Rectangle with invalid distances
 
-			double distances[] = { 3.00, 6.00, 4.00, 6.00 };
-			double diagonals[] = { 2.00, 2.00 };
+			double distances[] = { 3.00, 4.00, 6.00, 6.00,2.00, 2.00 };
 
-			bool validRectangle = isRectangle(distances, diagonals);
+			bool validRectangle = isRectangleFromDistances(distances);
 
 			Assert::AreEqual(false, validRectangle);
 		}
@@ -143,10 +143,9 @@ namespace PolygonCheckerTesting
 		{
 			//Tests polygon is correctly identified as not a Rectangle with invalid diagonals
 
-			double distances[] = { 4.00, 6.00, 4.00, 6.00 };
-			double diagonals[] = { 1.00, 2.00 };
+			double distances[] = { 4.00, 4.00, 6.00, 6.00, 2.00,2.00 };
 
-			bool validRectangle = isRectangle(distances, diagonals);
+			bool validRectangle = isRectangleFromDistances(distances);
 
 			Assert::AreEqual(true, validRectangle);
 		}
