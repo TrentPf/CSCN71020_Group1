@@ -9,7 +9,6 @@ int side = 0;
 
 int main() {
 	bool continueProgram = true;
-	int angle1, angle2, angle3;
 	while (continueProgram) {
 		printWelcome();
 

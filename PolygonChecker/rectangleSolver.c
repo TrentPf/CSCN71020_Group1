@@ -11,25 +11,33 @@ void processRectangle() {
         printf("Point %d - Enter x and y: ", i + 1);
         if (scanf_s("%lf %lf", &points[i][0], &points[i][1]) != 2) {
             printf("Invalid input. Please enter numeric values.\n");
-            i--; 
+            i--;
         }
     }
 
-    // Compute distances between points
-    double distances[4], diagonals[2];
-    distances[0] = calculateDistance(points[0][0], points[0][1], points[1][0], points[1][1]); 
-    distances[1] = calculateDistance(points[1][0], points[1][1], points[2][0], points[2][1]); 
-    distances[2] = calculateDistance(points[2][0], points[2][1], points[3][0], points[3][1]); 
-    distances[3] = calculateDistance(points[3][0], points[3][1], points[0][0], points[0][1]); 
-    diagonals[0] = calculateDistance(points[0][0], points[0][1], points[2][0], points[2][1]); 
-    diagonals[1] = calculateDistance(points[1][0], points[1][1], points[3][0], points[3][1]); 
+    // Compute pairwise distances
+    double distances[6]; // 6 unique pairs
+    int k = 0;
+    for (int i = 0; i < 4; i++) {
+        for (int j = i + 1; j < 4; j++) {
+            distances[k++] = calculateDistance(points[i][0], points[i][1], points[j][0], points[j][1]);
+        }
+    }
 
-    // Check if it's a rectangle
-    if (isRectangle(distances, diagonals)) {
+    // Sort distances for easier comparison
+    sortDistances(distances, 6);
+
+    // Validate if the points form a rectangle
+    if (isRectangleFromDistances(distances)) {
         printf("The points form a rectangle.\n");
-        double side1 = distances[0], side2 = distances[1];
+
+        // Compute sides from sorted distances
+        double side1 = distances[0];
+        double side2 = distances[1];
+
         double perimeter = calculateRectanglePerimeter(side1, side2);
         double area = calculateRectangleArea(side1, side2);
+
         printf("Perimeter: %.2lf\n", perimeter);
         printf("Area: %.2lf\n", area);
     }
@@ -42,10 +50,23 @@ double calculateDistance(double x1, double y1, double x2, double y2) {
     return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
 }
 
-bool isRectangle(double distances[], double diagonals[]) {
-    // Check if opposite sides are equal and diagonals are equal
-    return (distances[0] == distances[2] && distances[1] == distances[3] &&
-        diagonals[0] == diagonals[1]);
+void sortDistances(double* distances, int size) {
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = i + 1; j < size; j++) {
+            if (distances[i] > distances[j]) {
+                double temp = distances[i];
+                distances[i] = distances[j];
+                distances[j] = temp;
+            }
+        }
+    }
+}
+
+bool isRectangleFromDistances(double distances[]) {
+    // Check if the smallest four distances represent two equal pairs (sides)
+    // and the largest two represent equal diagonals
+    return (distances[0] == distances[1] && distances[2] == distances[3] &&
+        distances[4] == distances[5]);
 }
 
 double calculateRectangleArea(double side1, double side2) {
